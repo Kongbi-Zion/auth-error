@@ -1,4 +1,4 @@
-import { Amplify } from "aws-amplify";
+import { Amplify, AuthModeStrategyType } from "aws-amplify";
 import awsconfig from "../src/aws-exports";
   
 awsconfig.oauth["redirectSignIn"] = `${window.location.origin}/auth/`;
@@ -11,6 +11,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     
     Amplify.configure({
         ...awsconfig,
+        DataStore: {
+            authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+        },
         ssr: true
     });
     
